@@ -4,17 +4,14 @@ module dma_reader #(
 )(
   input  logic                  clk,
   input  logic                  rst_n,
-
   // Control from FSM
   input  logic                  read_enable,
   input  logic [ADDR_WIDTH-1:0] current_src_addr,
   input  logic [31:0]           current_burst_len,
-
   // FIFO
   input  logic                  fifo_full,
   output logic                  fifo_push,
   output logic [DATA_WIDTH-1:0] fifo_wdata,
-
   // AXI Read Address Channel
   output logic [ADDR_WIDTH-1:0] araddr,
   output logic [7:0]            arlen,
@@ -22,14 +19,12 @@ module dma_reader #(
   output logic [1:0]            arburst,
   output logic                  arvalid,
   input  logic                  arready,
-
   // AXI Read Data Channel
   input  logic [DATA_WIDTH-1:0] rdata,
   input  logic [1:0]            rresp,
   input  logic                  rlast,
   input  logic                  rvalid,
   output logic                  rready,
-
   // Status
   output logic                  read_done,
   output logic                  read_error

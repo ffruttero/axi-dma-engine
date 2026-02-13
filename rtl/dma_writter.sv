@@ -2,44 +2,38 @@ module dma_writer #(
   parameter int ADDR_WIDTH = 32,
   parameter int DATA_WIDTH = 32
 )(
-  input  logic                  clk,
-  input  logic                  rst_n,
-
+  input  logic                      clk,
+  input  logic                      rst_n,
   // Control from FSM
-  input  logic                  write_enable,         // Triggers a new write burst
-  input  logic [ADDR_WIDTH-1:0] current_dst_addr,     // Address to write to
-  input  logic [31:0]           current_burst_len,    // Bytes to write
-
+  input  logic                      write_enable,         // Triggers a new write burst
+  input  logic [ADDR_WIDTH-1:0]     current_dst_addr,     // Address to write to
+  input  logic [31:0]               current_burst_len,    // Bytes to write
   // FIFO interface (data source)
-  input  logic                  fifo_empty,
-  output logic                  fifo_pop,
-  input  logic [DATA_WIDTH-1:0] fifo_rdata,
-
+  input  logic                      fifo_empty,
+  output logic                      fifo_pop,
+  input  logic [DATA_WIDTH-1:0]     fifo_rdata,
   // AXI Write Address Channel
-  output logic [ADDR_WIDTH-1:0] awaddr,
-  output logic [7:0]            awlen,
-  output logic [2:0]            awsize,
-  output logic [1:0]            awburst,
-  output logic                  awvalid,
-  input  logic                  awready,
-
+  output logic [ADDR_WIDTH-1:0]     awaddr,
+  output logic [7:0]                awlen,
+  output logic [2:0]                awsize,
+  output logic [1:0]                awburst,
+  output logic                      awvalid,
+  input  logic                      awready,
   // AXI Write Data Channel
-  output logic [DATA_WIDTH-1:0] wdata,
+  output logic [DATA_WIDTH-1:0]     wdata,
   output logic [(DATA_WIDTH/8)-1:0] wstrb,
-  output logic                  wlast,
-  output logic                  wvalid,
-  input  logic                  wready,
-
+  output logic                      wlast,
+  output logic                      wvalid,
+  input  logic                      wready,
   // AXI Write Response Channel
-  input  logic [1:0]            bresp,
-  input  logic                  bvalid,
-  output logic                  bready,
-
+  input  logic [1:0]                bresp,
+  input  logic                      bvalid,
+  output logic                      bready,
   // Completion and error
-  output logic                  write_done,   // High for 1 cycle when burst ends
-  output logic                  write_error   // Sticky high on BRESP error
+  output logic                      write_done,   // High for 1 cycle when burst ends
+  output logic                      write_error   // Sticky high on BRESP error
 );
-// ------------------------------------------------------------
+  // ------------------------------------------------------------
   // Internal state
   // ------------------------------------------------------------
   logic         pending;         // Tracks whether a burst is active

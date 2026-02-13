@@ -130,5 +130,74 @@ dma_ctrl #(
    .done             (done),
    .error            (error)
 );
+dma_fifo #(
+   .DATA_WIDTH(DATA_WIDTH),
+   .DEPTH(DEPTH)
+) u_dma_fifo (
+   .clk     (clk),
+   .rst_n   (rst_n),
+   .push    (fifo_push),
+   .wdata   (prdata),
+   .pop     (fifo_pop),
+   .rdata   (pwdata),
+   .full    (fifo_full),
+   .empty   (fifo_empty)
+);
 
+dma_writter #(
+   .ADDR_WIDTH(ADDR_WIDTH),
+   .DATA_WIDTH(DATA_WIDTH)
+) u_dma_writter (
+   .clk(clk),
+   .rst_n(rst_n),
+   .write_enable(write_enable),
+   .current_dst_addr(current_dst_addr),
+   .current_burst_len(current_burst_len),
+   .fifo_empty(fifo_empty),
+   .fifo_pop(fifo_pop),
+   .fifo_rdata(pwdata),
+   .awaddr(awaddr),
+   .awlen(awlen),
+   .awsize(awsize),
+   .awburst(awburst),
+   .awvalid(awvalid),
+   .awready(awready),
+   .wdata(wdata),
+   .wstrb(wstrb),
+   .wlast(wlast),
+   .wvalid(wvalid),
+   .wready(wready),
+   .bresp(bresp),
+   .bvalid(bvalid),
+   .bready(bready),
+   .write_done(write_done),
+   .write_error(write_error)
+);
+
+dma_reader #(
+   .ADDR_WIDTH(ADDR_WIDTH),
+   .DATA_WIDTH(DATA_WIDTH)
+) u_dma_reader (
+   .clk(clk),
+   .rst_n(rst_n),
+   .read_enable(read_enable),
+   .current_src_addr(current_src_addr),
+   .current_burst_len(current_burst_len),
+   .fifo_full(fifo_full),
+   .fifo_push(fifo_push),
+   .fifo_wdata(wdata),
+   .araddr(araddr),
+   .arlen(arlen),
+   .arsize(arsize),
+   .arburst(arburst),
+   .arvalid(arvalid),
+   .arready(arready),
+   .rdata(rdata),
+   .rresp(rresp),
+   .rlast(rlast),
+   .rvalid(rvalid),
+   .rready(rready),
+   .read_done(read_done),
+   .read_error(read_error)
+);
 endmodule
