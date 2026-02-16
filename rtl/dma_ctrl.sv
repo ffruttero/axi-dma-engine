@@ -45,6 +45,7 @@ output logic                    error
     // 1. FSM State Register
     // ------------------------------------------------------------------------
     dma_state_e current_state, next_state;
+    logic [31:0]           bytes_left;
 
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n)
@@ -122,7 +123,6 @@ output logic                    error
     // ------------------------------------------------------------------------
 
     logic [ADDR_WIDTH-1:0] src_ptr, dst_ptr;
-    logic [31:0]           bytes_left;
 
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin

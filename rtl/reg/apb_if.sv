@@ -18,14 +18,14 @@ logic                   pslverr;
 
 //Master for driving request::
 modport master (
-  input pclk, presetn,
+  input pclk, prsetn,
   output paddr, psel, penable, pwrite, pwdata, pprot,
   input prdata, pready, pslverr
 );
 
 //Slave for driving response::
 modport slave (
-  input pclk, presetn,
+  input pclk, prsetn,
   input paddr, psel, penable, pwrite, pwdata, pprot,
   output prdata, pready, pslverr
 );
