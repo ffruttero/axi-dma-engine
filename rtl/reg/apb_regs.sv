@@ -46,8 +46,8 @@ module apb_regs #(
   assign apb.pready = 1'b1;
   assign apb.pslverr = apb_access && apb.pready && apb.pprot[1]; //Error when trying to perform non-secure access
 
-  always_ff @(posedge apb.pclk or negedge apb.presetn) begin
-  if (!apb.presetn) begin
+  always_ff @(posedge apb.pclk or negedge apb.prsetn) begin
+  if (!apb.prsetn) begin
     src_addr_r   <= '0;
     dst_addr_r   <= '0;
     length_r     <= '0;

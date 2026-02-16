@@ -107,7 +107,7 @@ module dma_writer #(
       write_done <= 1;
     end
   end
-  logic error_seen;
+
   assign write_error = error_seen;
   always_ff @(posedge clk, negedge rst_n) begin
     if (!rst_n) begin
