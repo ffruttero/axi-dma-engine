@@ -27,7 +27,7 @@ The AXI4 DMA controller consists of the following major components (see block di
 - **Internal FIFO Buffer:** A small SRAM or register-based FIFO that stores data between AXI reads and writes. For example, the FIFO might be 16 words deep (to hold several bursts of data). The read logic pushes data into the FIFO; the write logic pulls data from it. This decoupling allows the read and write phases to overlap: the DMA can start writing one burst from the FIFO while simultaneously the next burst of read data is being fetched into the FIFO (if the FIFO depth allows). To maintain high throughput, the controller checks FIFO level: it will only start a read burst when the FIFO has space for an entire burst, and only start a write burst when the FIFO has at least one burst of data available.
 - **Interrupt Logic:** A simple interrupt generator drives the IRQ output. When the transfer is complete or if an error condition occurs, a status flag is set and, if enabled, the IRQ line is asserted (held high). The IRQ is level-triggered (not pulsed) and is cleared when software writes to clear the status flag. This ensures the CPU will see the interrupt until it has serviced it and acknowledged the completion.
 
-![alt text](img/image.png)
+![alt text](img/DMA_SCHEMATIC.png)
 
 ### APB Slave Interface
 The controller’s APB slave interface conforms to the AMBA APB3/APB4 protocol for register access. Key aspects of the APB interface:
