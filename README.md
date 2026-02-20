@@ -30,29 +30,7 @@ The DMA controller performs autonomous memory-to-memory transfers using:
 
 ## High-Level Architecture
 
-```
-CPU (APB)
-   │
-   ▼
-┌─────────────┐
-│  APB RegBlk │
-└─────────────┘
-        │
-        ▼
-┌─────────────┐
-│  DMA CTRL   │  ← FSM (IDLE / READ / WRITE / COMPLETE)
-└─────────────┘
-   │        │
-   ▼        ▼
-┌───────┐  ┌────────┐
-│Reader │  │ Writer │
-└───────┘  └────────┘
-     │        ▲
-     ▼        │
-     └── FIFO ┘
-```
-
----
+![alt text](doc/img/DMA_SCHEMATIC.png)
 
 # 🚀 Key Features
 
